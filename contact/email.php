@@ -33,16 +33,20 @@ if(empty($errors))
 	$headers .= "From: $from_name\n";
 	$headers .= "Reply-To: $from_email";
  
-	mail($to_email,$email_subject,$email_body,$headers);
-	mail($to_email_cc,$email_subject_cc,$email_body,$headers);
- 
-	$response_array['status'] = 'success';
+	if(mail($to_email,$email_subject,$email_body,$headers)){
+		$response_array['status'] = 'success';	
+		echo json_encode($response_array);
+	} else {
+		$response_array['status'] = 'error';
 	echo json_encode($response_array);
+	}
+	
+ 
+	
 
 	
 } else {
-	$response_array['status'] = 'error';
-	echo json_encode($response_array);
+	
 }
 
 ?>
