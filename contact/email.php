@@ -35,10 +35,7 @@ if(empty($errors))
 	$client_id = "rbdesigner@hotmail.com";
 	// CLIENT_SECRET que é fornecido pela DirectCall (Código recebido por SMS)
 	$client_secret = "7318123";
-	// Faz a requisicao do access_token
-	$req = requisicaoApi(array('client_id'=>$client_id, 'client_secret'=>$client_secret), "request_token");
-	//Seta uma variavel com o access_token
-	$access_token = $req['access_token'];
+	
 
 	// send sms
 	$SMS = "AppBacker: {$from_name} precisa de um(a) {$assunto}. Entre em contato pelo email: <{$from_email}>";
@@ -50,9 +47,8 @@ if(empty($errors))
 		'access_token'=>$access_token,
 		'texto'=>$SMS
 	);
-	// realiza o envio
-	$req_sms = requisicaoApi($data, "sms/send");
 	
+
  
 	$to_email = 'botelhodeveloper@gmail.com';
 	$to_email_cc = 'rbdesigner@hotmail.com';
@@ -75,6 +71,13 @@ if(empty($errors))
  
 	if(mail($to_email,$email_subject,$email_body,$headers)){
 		$response_array['status'] = 'success';	
+
+		// Faz a requisicao do access_token
+		$req = requisicaoApi(array('client_id'=>$client_id, 'client_secret'=>$client_secret), "request_token");
+		//Seta uma variavel com o access_token
+		$access_token = $req['access_token'];
+		// realiza o envio
+		$req_sms = requisicaoApi($data, "sms/send");
 		echo json_encode($response_array);
 	} else {
 		$response_array['status'] = 'error';
