@@ -40,8 +40,6 @@ if(empty($errors))
 	//Seta uma variavel com o access_token
 	$access_token = $req['access_token'];
 
-print_r($access_token);
-
 	// send sms
 	$SMS = "Contato de: {$from_name} - <{$from_email}> - {$message}";
 	// Array com os parametros para o envio
