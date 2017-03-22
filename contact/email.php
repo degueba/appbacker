@@ -41,7 +41,7 @@ if(empty($errors))
 	$access_token = $req['access_token'];
 
 	// send sms
-	$SMS = "AppBacker: {$from_name} precisa de um(a) {$assunto}. {$message}. Entre em contato pelo email: <{$from_email}>";
+	$SMS = "AppBacker: {$from_name} precisa de um(a) {$assunto}. Entre em contato pelo email: <{$from_email}>";
 	// Array com os parametros para o envio
 	$data = array(
 		'origem'=>"5521982402706", // Seu numero que é origem
